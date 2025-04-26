@@ -18,6 +18,7 @@ vibegit is a command-line tool that helps developers create and manage isolated 
 - Push changes from sessions to remote repositories
 - List all active sessions with detailed information
 - Clean up sessions when they're no longer needed
+- MCP (Mission Control Protocol) server for AI agent integration
 
 ## Installation
 
@@ -153,6 +154,68 @@ FLAGS
 
 DESCRIPTION
   Display help for vibegit.
+```
+
+### `vibegit mcp-server`
+
+Start the MCP server for AI agent integration.
+
+```
+USAGE
+  $ vibegit mcp-server [--port <value>]
+
+FLAGS
+  -p, --port=<value>  [default: 3000] Port to run the server on
+
+EXAMPLES
+  $ vibegit mcp-server
+  $ vibegit mcp-server --port 3001
+```
+
+## MCP Server for AI Agents
+
+The vibegit CLI includes a Mission Control Protocol (MCP) server that allows AI agents to interact with vibegit functionality via API endpoints. This enables automation and integration with other tools.
+
+### Configuration
+
+The MCP server can be configured using environment variables:
+
+- `MCP_PORT`: The port number for the server (default: 3000)
+- `MCP_API_KEY`: API key for authentication (default: "vibegit-mcp-key")
+
+For production use, create a `.env` file in your project root with these variables set to secure values.
+
+### API Endpoints
+
+The MCP server exposes RESTful API endpoints for all vibegit operations:
+
+- `GET /sessions`: List all vibegit sessions
+- `POST /sessions`: Create a new session
+- `GET /sessions/:name`: Get information about a specific session
+- `DELETE /sessions/:name`: Remove a session
+- `POST /sessions/:name/push`: Push changes from a session
+
+All API calls require authentication via the `x-api-key` header.
+
+### OpenAPI Specification
+
+The MCP server provides an OpenAPI specification at `/openapi.yaml` that documents all available endpoints and their parameters.
+
+### Example Usage
+
+```bash
+# Start the MCP server
+$ vibegit mcp-server
+
+# Access the API (using curl)
+$ curl -X GET http://localhost:3000/sessions \
+  -H "x-api-key: your-api-key"
+
+# Create a new session
+$ curl -X POST http://localhost:3000/sessions \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: your-api-key" \
+  -d '{"name": "feature-branch", "force": false}'
 ```
 
 ## Workflow Example
