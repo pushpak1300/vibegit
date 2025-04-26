@@ -1,7 +1,7 @@
 {
   "name": "vibegit",
   "description": "Become 10x vibecoder",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Pushpak Chhajed",
   "bin": {
     "vibegit": "./bin/run.js"
