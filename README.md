@@ -9,7 +9,7 @@ Become 10x more productive by orchestrating multiple AI coding agents in isolate
 [![Downloads/week](https://img.shields.io/npm/dw/vibegit.svg)](https://npmjs.org/package/vibegit)
 [![License](https://img.shields.io/npm/l/vibegit.svg)](https://github.com/pushpak1300/vibegit/LICENSE)
 
-vibegit is a cli tool that empowers developers to orchestrate multiple AI coding agents working simultaneously on different aspects of a project. By creating isolated git environments for each agent, vibegit enables parallel development without conflicts, allowing you to harness the full potential of AI-assisted coding at scale.
+vibegit is a CLI tool that empowers developers to orchestrate multiple AI coding agents working simultaneously on different aspects of a project. By creating isolated git environments for each agent, vibegit enables parallel development without conflicts, allowing you to harness the full potential of AI-assisted coding at scale.
 
 ## Why vibegit for Multi-Agent Coding?
 
@@ -161,48 +161,34 @@ DESCRIPTION
 
 ### `vibegit mcp-server`
 
-Start the MCP server for AI agent integration.
+Start an MCP (Mission Control Protocol) server that exposes vibegit commands as tools for AI agents.
 
 ```
 USAGE
   $ vibegit mcp-server [--port <value>]
 
 FLAGS
-  -p, --port=<value>  [default: 3000] Port to run the server on
+  -p, --port=<value>  [default: 3333] Port to run MCP server on
 
 EXAMPLES
   $ vibegit mcp-server
-  $ vibegit mcp-server --port 3001
+  $ vibegit mcp-server --port 3000
 ```
 
 ## MCP Server for AI Agents
 
 The vibegit CLI includes a Mission Control Protocol (MCP) server that allows AI agents to interact with vibegit functionality via API endpoints. This enables automation and integration with other tools.
 
-### Configuration
-
-The MCP server can be configured using environment variables:
-
-- `MCP_PORT`: The port number for the server (default: 3000)
-- `MCP_API_KEY`: API key for authentication (default: "vibegit-mcp-key")
-
-For production use, create a `.env` file in your project root with these variables set to secure values.
-
 ### API Endpoints
 
 The MCP server exposes RESTful API endpoints for all vibegit operations:
 
-- `GET /sessions`: List all vibegit sessions
-- `POST /sessions`: Create a new session
-- `GET /sessions/:name`: Get information about a specific session
-- `DELETE /sessions/:name`: Remove a session
-- `POST /sessions/:name/push`: Push changes from a session
+- `GET /`: Lists available tools and endpoints
+- `POST /list-tools`: Lists all available vibegit commands as tools
+- `POST /call-tool`: Executes a specific vibegit command
+- `POST /close`: Shuts down the MCP server
 
-All API calls require authentication via the `x-api-key` header.
-
-### OpenAPI Specification
-
-The MCP server provides an OpenAPI specification at `/openapi.yaml` that documents all available endpoints and their parameters.
+All tools exposed by the MCP server can be accessed programmatically, enabling AI agents to interact with vibegit sessions.
 
 ### Example Usage
 
@@ -210,15 +196,9 @@ The MCP server provides an OpenAPI specification at `/openapi.yaml` that documen
 # Start the MCP server
 $ vibegit mcp-server
 
-# Access the API (using curl)
-$ curl -X GET http://localhost:3000/sessions \
-  -H "x-api-key: your-api-key"
-
-# Create a new session
-$ curl -X POST http://localhost:3000/sessions \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: your-api-key" \
-  -d '{"name": "feature-branch", "force": false}'
+# In a separate terminal or application, you can interact with the API
+# For example, using curl to list available tools:
+$ curl -X POST http://localhost:3333/list-tools
 ```
 
 ## Workflow Example
