@@ -2,23 +2,26 @@
 
 # vibegit
 
-Become 10x vibecoder by managing isolated sandboxed git environments.
+Become 10x more productive by orchestrating multiple AI coding agents in isolated, sandboxed git environments.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/vibegit.svg)](https://npmjs.org/package/vibegit)
 [![Downloads/week](https://img.shields.io/npm/dw/vibegit.svg)](https://npmjs.org/package/vibegit)
-[![License](https://img.shields.io/npm/l/vibegit.svg)](https://github.com/pushpak1300/vibegit/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/vibegit.svg)](https://github.com/pushpak1300/vibegit/LICENSE)
 
-vibegit is a command-line tool that helps developers create and manage isolated git environments for experimentation. It allows you to create separate copies of your repository to work on different features, fixes, or ideas without affecting your main codebase.
+vibegit is a cli tool that empowers developers to orchestrate multiple AI coding agents working simultaneously on different aspects of a project. By creating isolated git environments for each agent, vibegit enables parallel development without conflicts, allowing you to harness the full potential of AI-assisted coding at scale.
 
-## Features
+## Why vibegit for Multi-Agent Coding?
 
-- Create isolated copies of your git repository with their own branches
-- Easily navigate between different sessions
-- Push changes from sessions to remote repositories
-- List all active sessions with detailed information
-- Clean up sessions when they're no longer needed
-- MCP (Mission Control Protocol) server for AI agent integration
+Working with multiple AI coding agents presents unique challenges:
+
+- **Environment Isolation**: Each AI agent needs its own clean workspace to avoid conflicts
+- **Context Management**: Agents need access to relevant code without confusion
+- **Coordination**: Orchestrating multiple agents requires a centralized control mechanism
+- **Integration**: Combining work from multiple agents can be complex
+- **Workflow Management**: Tracking what each agent is doing becomes difficult at scale
+
+vibegit solves these problems through its innovative approach to multi-agent development.
 
 ## Installation
 
