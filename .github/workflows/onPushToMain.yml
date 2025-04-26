@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Check if version already exists
         id: version-check
         run: |
@@ -38,8 +41,8 @@ jobs:
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         id: oclif-readme
         run: |
-          npm install
-          npm exec oclif readme
+          bun install
+          bunx oclif readme
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -am "chore: update README.md"
