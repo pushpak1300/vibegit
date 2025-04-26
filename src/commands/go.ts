@@ -1,4 +1,4 @@
-import {Args, Command} from '@oclif/core'
+import {Args, Command, Flags} from '@oclif/core'
 import {execSync} from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -8,14 +8,19 @@ export default class Go extends Command {
   static override args = {
     session: Args.string({description: 'Name of the session to go to', required: true}),
   }
-  static override description = 'Show path to a vibegit session directory'
+  static override description = 'Output command to navigate to a vibegit session directory'
   static override examples = [
     '<%= config.bin %> <%= command.id %> feature-branch',
+    'eval "$(<%= config.bin %> <%= command.id %> feature-branch)"',
   ]
+  static override flags = {
+    'no-hint': Flags.boolean({description: 'Suppress usage hints'}),
+  }
 
   public async run(): Promise<void> {
-    const {args} = await this.parse(Go)
+    const {args, flags} = await this.parse(Go)
     const {session} = args
+    const showHints = !flags['no-hint']
 
     // Start spinner
     const spinner = ora('Finding vibegit session...').start()
@@ -45,7 +50,7 @@ export default class Go extends Command {
       spinner.stop()
 
       if (sessions.length === 0) {
-        this.log('No vibegit sessions found')
+        this.error('No vibegit sessions found')
         return
       }
 
@@ -57,8 +62,16 @@ export default class Go extends Command {
         return
       }
 
-      // Show the path to the session
-      this.log(`cd "${sessionDir.fullPath}"`)
+      // Show only the cd command without any extra text
+      // This makes it suitable for shell evaluation
+      process.stdout.write(`cd "${sessionDir.fullPath}"\n`)
+      
+      // Show a note about usage in stderr (won't be captured by eval)
+      if (showHints) {
+        process.stderr.write(`\nTip: To navigate directly, use: eval "$(vibegit go ${session})"\n`)
+        process.stderr.write(`Add this to your shell profile for convenience:\n`)
+        process.stderr.write(`function vg() { eval "$(vibegit go $1)"; }\n`)
+      }
     } catch (error) {
       spinner.fail(`Failed: ${error instanceof Error ? error.message : String(error)}`)
       throw error
