@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --loader ts-node/esm --disable-warning=ExperimentalWarning
+#!/usr/bin/env -S NODE_OPTIONS='--no-deprecation' node --loader ts-node/esm --disable-warning=ExperimentalWarning
 
 import {execute} from '@oclif/core'
 
