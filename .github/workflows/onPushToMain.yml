@@ -42,6 +42,7 @@ jobs:
         id: oclif-readme
         run: |
           bun install
+          bun run build
           bunx oclif readme
           if [ -n "$(git status --porcelain)" ]; then
             git add .
