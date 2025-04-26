@@ -53,12 +53,14 @@
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
+    "helpClass": "./src/help",
     "topicSeparator": " ",
     "topics": {
       "hello": {
         "description": "Say hello to the world and others"
       }
-    }
+    },
+    "default": "help"
   },
   "repository": "pushpak1300/vibegit",
   "scripts": {
