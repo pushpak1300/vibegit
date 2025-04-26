@@ -1,3 +1,5 @@
+![VIBEGIT Logo](art/vibegit.png)
+
 # vibegit
 
 Become 10x vibecoder by managing isolated sandboxed git environments.
