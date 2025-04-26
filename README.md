@@ -7,7 +7,7 @@ Become 10x more productive by orchestrating multiple AI coding agents in isolate
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/vibegit.svg)](https://npmjs.org/package/vibegit)
 [![Downloads/week](https://img.shields.io/npm/dw/vibegit.svg)](https://npmjs.org/package/vibegit)
-[![License](https://img.shields.io/npm/l/vibegit.svg)](https://github.com/pushpak1300/vibegit/LICENSE)
+[![License](https://github.com/pushpak1300/vibegit/blob/main/LICENSE)
 
 vibegit is a CLI tool that empowers developers to orchestrate multiple AI coding agents working simultaneously on different aspects of a project. By creating isolated git environments for each agent, vibegit enables parallel development without conflicts, allowing you to harness the full potential of AI-assisted coding at scale.
 
